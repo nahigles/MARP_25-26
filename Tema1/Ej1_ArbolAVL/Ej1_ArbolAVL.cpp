@@ -36,6 +36,7 @@ struct TreeInfo {
 	T max;
 };
 
+// Complejidad lineal en n, siendo n el numero de nodos del arbol. Tiene que recorrer todo el arbol
 template <typename T>
 TreeInfo<T> isAVL(const BinTree<T>& t) {
 
