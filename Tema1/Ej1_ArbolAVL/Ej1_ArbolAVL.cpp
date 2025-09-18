@@ -29,49 +29,77 @@ using namespace std;
  //@ <answer>
 
 template <typename T>
-bool isAVL(const BinTree<T>& t, T& minT, T& maxT) {
-	if (t.empty()) {
-		return true;
-	}
-	else {
-		T minLeft; T maxLeft;
-		T minRight; T maxRight;
-
-		bool isAVLLeft = isAVL(t.left(), minLeft, maxLeft);
-		bool isAVLRight = isAVL(t.right(), minRight, maxRight);
-
-		minT = min(minLeft, minRight, t.root());
-		maxT = max(maxLeft, maxRight, t.root());
-
-		return isAVLLeft && isAVLRight && maxLeft < t.root() && t.root() < minRight ;
-	}
-}
+struct TreeInfo {
+	bool isAVL;
+	int altura;
+	T min;
+	T max;
+};
 
 template <typename T>
+TreeInfo<T> isAVL(const BinTree<T>& t) {
+
+	TreeInfo<T> info;
+
+	if (t.empty()) {
+		info.isAVL = true;
+		info.altura = 0;
+		info.min = T();
+		info.max = T();
+	}
+	else {
+		TreeInfo<T> leftI = isAVL(t.left());
+		TreeInfo<T> rightI = isAVL(t.right());
+
+		info.isAVL = leftI.isAVL && rightI.isAVL && (abs(leftI.altura - rightI.altura) < 2) && (t.left().empty() || leftI.max < t.root()) && (t.right().empty() || t.root() < rightI.min);
+		info.altura = max(leftI.altura, rightI.altura) + 1;
+
+		if (t.right().empty() && t.left().empty()) {
+			info.min = t.root();
+			info.max = t.root();
+		}
+		else if (t.right().empty()) {
+			info.min = min(t.root(), leftI.min);
+			info.max = max(t.root(),leftI.max);
+		}
+		else if (t.left().empty()) {
+			info.min = min(t.root(), rightI.min);
+			info.max = max(t.root(), rightI.max);
+		}
+		else {
+			info.min = min(t.root(), min(leftI.min, rightI.min));
+			info.max = max(t.root(), max(leftI.max, rightI.max));
+		}
+	}
+
+	return info;
+}
+
+
 bool resuelveCaso() {
 	// leer los datos de la entrada
 	char mode;
 	cin >> mode;
 
-	if (mode == 'N') {
-
-		BinTree<int> t = read_tree(cin);
-	}
-	else if (mode == 'P') {
-
-		BinTree<string> t = read_tree(cin);
-	}
-
 	if (!std::cin)  // fin de la entrada
 		return false;
 
 	// resolver el caso posiblemente llamando a otras funciones
-	T min = T();
-	T max = T();
-	bool isAVLTree = isAVL(t, min, max);
+	bool isAVLTree;
+
+	if (mode == 'N') {
+		BinTree<int> t = read_tree<int>(cin);
+		TreeInfo<int> info = isAVL(t);
+		isAVLTree = info.isAVL;
+	}
+	else if (mode == 'P') {
+		BinTree<string> t = read_tree<string>(cin);
+		TreeInfo<string> info = isAVL(t);
+		isAVLTree = info.isAVL;
+	}
 
 	// escribir la solución
-
+	cout << (isAVLTree ? "SI" : "NO") << endl;
 
 	return true;
 }
