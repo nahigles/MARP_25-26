@@ -33,10 +33,10 @@ protected:
    struct TreeNode {
       T elem;
       Link iz, dr;
-      int tam_i;
       int altura;
+      int tam_i;
       TreeNode(T const& e, Link i = nullptr, Link d = nullptr,
-               int alt = 1) : elem(e), iz(i), dr(d), altura(alt) {}
+               int alt = 1, int tam = 1) : elem(e), iz(i), dr(d), altura(alt), tam_i(tam){}
    };
 
    // puntero a la raíz de la estructura jerárquica de nodos

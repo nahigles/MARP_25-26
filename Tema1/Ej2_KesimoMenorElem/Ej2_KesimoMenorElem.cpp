@@ -1,9 +1,8 @@
 
 /*@ <authors>
  *
- * Nahia Iglesias Calvo
- * MARPV28
- *
+ * MARPV28 Nahia Iglesias Calvo
+ * 
  *@ </authors> */
 
 #include <iostream>
