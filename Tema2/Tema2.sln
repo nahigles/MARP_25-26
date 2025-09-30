@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EjL_PartiturasOrquesta", "E
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ej5_ColeccionandoComics", "Ej5_ColeccionandoComics\Ej5_ColeccionandoComics.vcxproj", "{7DC74DC6-1F29-4D73-86A6-23701715283D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ej2_UnidadCuriosaMonitorizacion", "Ej2_UnidadCuriosaMonitorizacion\Ej2_UnidadCuriosaMonitorizacion.vcxproj", "{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{7DC74DC6-1F29-4D73-86A6-23701715283D}.Release|x64.Build.0 = Release|x64
 		{7DC74DC6-1F29-4D73-86A6-23701715283D}.Release|x86.ActiveCfg = Release|Win32
 		{7DC74DC6-1F29-4D73-86A6-23701715283D}.Release|x86.Build.0 = Release|Win32
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Debug|x64.ActiveCfg = Debug|x64
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Debug|x64.Build.0 = Debug|x64
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Debug|x86.ActiveCfg = Debug|Win32
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Debug|x86.Build.0 = Debug|Win32
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Release|x64.ActiveCfg = Release|x64
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Release|x64.Build.0 = Release|x64
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Release|x86.ActiveCfg = Release|Win32
+		{B4F9C657-25F1-4C10-95AD-8BD8DF357EEA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
