@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <ostream>
+#include <exception>
 using namespace std;
 
 #include "TreeSet_AVL.h"  // propios o los de las estructuras de datos de clase
@@ -57,7 +59,7 @@ bool resuelveCaso() {
 		}
 		catch (const std::exception& e)
 		{
-			cout << e.what() << endl;
+			cout << "??" << endl;
 		}
 
 	}

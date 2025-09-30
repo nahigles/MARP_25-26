@@ -94,7 +94,7 @@ public:
    T const& kesimo(int k) const {
 
        if (k < 1 || k > nelems) {
-           throw std::exception("??");
+           throw std::exception();
        }
 
        return auxKesimo(raiz, k);
@@ -256,9 +256,9 @@ protected:
       return decrece;
    }
 
-   T const& auxKesimo(Link a, int k) {
+   T const& auxKesimo(Link a, int k) const {
        // Lanza excepcion si no encuentra k
-       if (a == nullptr) throw std::exception("??");
+       if (a == nullptr) throw std::exception();
 
        if (k == a->tam_i) return a->elem; // Si es k devuelve el numero
        else if (k < a->tam_i) return auxKesimo(a->iz, k); // Si k es menor el elemento buscado esta a la izquierda
