@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <fstream>
-//#include <...>
 using namespace std;
 
 #include "TreeSet_AVL.h"  // propios o los de las estructuras de datos de clase
@@ -34,9 +33,37 @@ bool resuelveCaso() {
 	if (numElems == 0)
 		return false;
 
+	// Inserto elementos en el conjunto
+	Set<int> set;
+	for (int i = 0; i < numElems; i++) {
+		int e;
+		cin >> e;
+		set.insert(e);
+	}
+
+	// Elementos a consultar
+	int numConsultas;
+	cin >> numConsultas;
+
 	// resolver el caso posiblemente llamando a otras funciones
+	for (int i = 0; i < numConsultas; i++) {
+		int k;
+		cin >> k;
+
+		try
+		{
+			cout << set.kesimo(k) << endl;
+
+		}
+		catch (const std::exception& e)
+		{
+			cout << e.what() << endl;
+		}
+
+	}
 
 	// escribir la solución
+	cout << "---" << endl;
 
 	return true;
 }

@@ -1,7 +1,7 @@
 
 /*@ <authors>
  *
- * Nombre, apellidos y usuario del juez (TAISXXX) de los autores de la solución.
+ * MARP28 Nahia Iglesias Calvo
  *
  *@ </authors> */
 

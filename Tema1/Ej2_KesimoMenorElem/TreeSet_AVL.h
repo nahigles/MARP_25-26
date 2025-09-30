@@ -93,7 +93,11 @@ public:
 
    T const& kesimo(int k) const {
 
-       return kEsimo(raiz, k);
+       if (k < 1 || k > nelems) {
+           throw std::exception("??");
+       }
+
+       return auxKesimo(raiz, k);
    }
 
 protected:
@@ -140,7 +144,10 @@ protected:
          crece = true;
       } else if (menor(e, a->elem)) {
          crece = inserta(e, a->iz);
-         if (crece) reequilibraDer(a);
+         if (crece) {
+             a->tam_i++;
+             reequilibraDer(a);
+         }
       } else if (menor(a->elem, e)) {
          crece = inserta(e, a->dr);
          if (crece) reequilibraIzq(a);
@@ -156,19 +163,25 @@ protected:
 
    void rotaDer(Link & r2) {
       Link r1 = r2->iz;
+      int tr2 = r2->tam_i;
+      int tr1 = r1->tam_i;
       r2->iz = r1->dr;
       r1->dr = r2;
       r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
       r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
+      r2->tam_i = tr2 - tr1;
       r2 = r1;
    }
 
    void rotaIzq(Link & r1) {
       Link r2 = r1->dr;
+      int tr2 = r2->tam_i;
+      int tr1 = r1->tam_i;
       r1->dr = r2->iz;
       r2->iz = r1;
       r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
       r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
+      r2->tam_i = tr2 + tr1;
       r1 = r2;
    }
 
@@ -243,8 +256,13 @@ protected:
       return decrece;
    }
 
-   T kEsimo(Link& a, int k) {
-  
+   T const& auxKesimo(Link a, int k) {
+       // Lanza excepcion si no encuentra k
+       if (a == nullptr) throw std::exception("??");
+
+       if (k == a->tam_i) return a->elem; // Si es k devuelve el numero
+       else if (k < a->tam_i) return auxKesimo(a->iz, k); // Si k es menor el elemento buscado esta a la izquierda
+       else return auxKesimo( a->dr, k - a->tam_i); // Si es mayor se encuentra en la derecha
    }
 
 public:
