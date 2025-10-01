@@ -32,9 +32,10 @@ struct Registro {
 	int periodo;
 };
 
-bool operator>(Registro const& a, Registro const& b) {
+bool operator<(Registro const& a, Registro const& b) {
 	return b.momento < a.momento || (a.momento == b.momento && b.id < a.id);
 }
+
 bool resuelveCaso() {
 	// leer los datos de la entrada
 	int n;

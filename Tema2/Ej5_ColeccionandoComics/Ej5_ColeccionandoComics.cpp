@@ -61,19 +61,20 @@ bool resuelveCaso() {
 			// Miro si es el menor q tengo guardado y sino lo actualizo
 			if (j == 0) {
 				// Meto el primer elem
-				infoPilas[n].menor = e;
+				infoPilas[i].menor = e;
 			}
 			else {
-				infoPilas[n].menor = min(infoPilas[n].menor, e);
+				infoPilas[i].menor = min(infoPilas[i].menor, e);
 			}
 
-			infoPilas[n].pilaLibros.push(e);
+			infoPilas[i].pilaLibros.push(e);
 		}
 	}
 
 	// Anyado a una cola de prioridad las pilas de libros
 	int menorTotal;
 	priority_queue<InfoPila> pilasQueue;
+	//priority_queue<InfoPila, greater<InfoPila>> pilasQueue; // Cola prioridad de minimos
 	for (int i = 0; i < infoPilas.size(); i++) {
 		if (i == 0)
 			menorTotal = infoPilas[i].menor;
@@ -85,14 +86,24 @@ bool resuelveCaso() {
 
 	// resolver el caso posiblemente llamando a otras funciones
 	int i = 1;
-	while (pilasQueue.top().pilaLibros.size() > 0 && pilasQueue.top().pilaLibros.top() != menorTotal) {
+	while (/*pilasQueue.top().pilaLibros.size() > 0 &&*/ pilasQueue.top().pilaLibros.top() != menorTotal) {
 		// Quito el eelemento de arriba de la pila qu toque
-		//pilasQueue.top().pilaLibros.
+		auto p = pilasQueue.top();
+		p.pilaLibros.pop();
 
+		if (p.pilaLibros.empty()) {
+			pilasQueue.pop(); // Quita el ultimo que deberia ser el que este vacio
+			// segun el operador < que he programado
+		}
+
+		cout << i << endl;
 		i++;
 	}
+	// Cuando sale del bucle ya ha contado donde se tiene que colocar
+
 
 	// escribir la solución
+	cout << i << endl;
 
 	return true;
 }
