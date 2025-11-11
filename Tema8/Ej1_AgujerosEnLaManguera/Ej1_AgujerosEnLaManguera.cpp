@@ -42,14 +42,20 @@ bool resuelveCaso() {
 	}
 
 	// resolver el caso posiblemente llamando a otras funciones
+	int numParches = 0;
 	int ultParche = 0;
-
 	for (int i = 0; i < agujeros.size(); i++) {
 
-		if ()
+		if (agujeros[i] >= ultParche) {
+
+			// Pongo parche
+			ultParche = agujeros[i]-1 + L;
+			numParches++;
+		}
 	}
 
 	// escribir la solución
+	cout << numParches << endl;
 
 	return true;
 }
