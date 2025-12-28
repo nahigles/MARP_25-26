@@ -15,15 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ej1_RapidEats.cpp">
+    <ClCompile Include="EjL_CambioExacto.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DigrafoValorado.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexPQ.h">
+    <ClInclude Include="EnterosInf.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

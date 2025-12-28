@@ -1,22 +1,16 @@
 
 /*@ <authors>
  *
- * MARP28 Nahia Iglesias Calvo
+ * MARPV28 Nahia Iglesias Calvo
  *
  *@ </authors> */
 
 #include <iostream>
 #include <fstream>
-#include <queue>
-#include <deque>
-#include <string>
-#include <limits>
-#include <algorithm>
-
+#include <vector>
 using namespace std;
 
 #include "DigrafoValorado.h"  // propios o los de las estructuras de datos de clase
-#include "IndexPQ.h"
 
 /*@ <answer>
 
@@ -31,7 +25,6 @@ using namespace std;
  // Escribe el código completo de tu solución aquí debajo
  // ================================================================
  //@ <answer>
-
 
 template <typename Valor>
 using Camino = deque<AristaDirigida<Valor>>;
@@ -84,49 +77,16 @@ private:
 
 bool resuelveCaso() {
 	// leer los datos de la entrada
-	int N, C; // N -> puntos,  C -> Tramos
-	cin >> N >> C;
-	if (!std::cin)  // fin de la entrada
+	int N; // N -> paginas
+	cin >> N;
+	if (N == 0)
 		return false;
 
-	DigrafoValorado<int> grafo(N);
-
-	for (int i = 0; i < C; i++) {
-		int a, b, mins;
-		cin >> a >> b >> mins;
-		a--; b--;
-		grafo.ponArista({ a,b,mins });
-		grafo.ponArista({ b,a,mins });
-	}
-
-	int K; // pedidos
-	cin >> K;
-
+	// Leo mins de paginas
+	vector<int> mi
 	// resolver el caso posiblemente llamando a otras funciones
-	for (int i = 0; i < K; i++) {
-		int origen, destino;
-		cin >> origen >> destino;
-		origen--; destino--;
-		Dijkstra<int> d(grafo, origen);
-		if (d.hayCamino(destino)) {
-			Camino<int> cola = d.camino(destino);
-			cout << to_string(d.distancia(destino)) + ": ";
-
-			while (!cola.empty())
-			{
-				AristaDirigida<int> a = cola.front(); cola.pop_front();
-				cout << a.desde() + 1 << " -> ";
-				if (cola.empty())
-					cout << a.hasta() + 1 << "\n";
-			}
-		}
-		else
-			cout << "NO LLEGA" << endl;
-	}
 
 	// escribir la solución
-	cout << "---" << endl;
-
 
 	return true;
 }
