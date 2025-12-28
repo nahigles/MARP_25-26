@@ -16,9 +16,15 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+Para saber si un arbol es AVL nos interesa saber la altura de sus hijos y si estos son AVL tambien.
+En este ejercicio recorro todo el arbol recursivamente empezando por los hijos y combrobando si las
+alturas de sus hijos como maximo se llevan 1. Me voy guardando la altura de cada hijo, booleano de
+si es AVL y su valor minimo y maximo para comprobar y devolver esa informacion del nodo en el que
+se encuentre esa llamada recursiva.
+Por lo tanto:
+
+Complejidad en tiempo: O(n), siendo n el numero de nodos del arbol
+Complejidad en espacio: O(n), siendo n el numero de nodos del arbol
 
  @ </answer> */
 
