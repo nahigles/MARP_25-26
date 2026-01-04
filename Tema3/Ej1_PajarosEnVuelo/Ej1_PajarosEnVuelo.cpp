@@ -1,15 +1,15 @@
 
 /*@ <authors>
  *
- * MARP28 Nahia Iglesias Calvo
+ * MARPV28 Nahia Iglesias Calvo
  *
  *@ </authors> */
 
 #include <iostream>
 #include <fstream>
-
 using namespace std;
 
+#include "IndexPQ.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -20,18 +20,23 @@ using namespace std;
  @ </answer> */
 
 
-// ================================================================
-// Escribe el código completo de tu solución aquí debajo
-// ================================================================
-//@ <answer>
+ // ================================================================
+ // Escribe el código completo de tu solución aquí debajo
+ // ================================================================
+ //@ <answer>
+
 
 bool resuelveCaso() {
 	// leer los datos de la entrada
+	int E, N;
+	cin >> E >> N;
 
-	if (!std::cin)  // fin de la entrada
+	if (E == 0 && N == 0)
 		return false;
 
 	// resolver el caso posiblemente llamando a otras funciones
+	IndexPQ<int, greater<int>> pajaros(N*2 +1);
+
 
 	// escribir la solución
 
@@ -42,7 +47,7 @@ bool resuelveCaso() {
 //  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
 
 int main() {
-// ajustes para que cin extraiga directamente de un fichero
+	// ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
 	std::ifstream in("casos.txt");
 	if (!in.is_open())
@@ -52,7 +57,7 @@ int main() {
 
 	while (resuelveCaso());
 
-// para dejar todo como estaba al principio
+	// para dejar todo como estaba al principio
 #ifndef DOMJUDGE
 	std::cin.rdbuf(cinbuf);
 	std::cout << "Pulsa Intro para salir..." << std::flush;

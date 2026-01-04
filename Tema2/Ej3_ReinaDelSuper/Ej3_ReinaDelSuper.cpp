@@ -14,12 +14,11 @@ using namespace std;
 
 Para calcular la caja a la que le toca ir a Ismael, he utilizado una cola de prioridad de minimos
 de "Cliente". Es un struct que tiene la informacion de la caja en la que esta el cliente y los segundos
-que tarda en ella.
-Para resolver el problema, primero anyado los clientes que entre en las cajas libres, si no se han llegado
-escribo la caja que le toca a Ismael.
-En caso de que se hayan llenado voy sacando el cliente mas prioritario y metiendo el siguiente hasta que me
-quedo sin clientes que meter, entonces ya sabemos la caja que le toca a Isamael.
-Voy sumando los segundos que llevan y acumulandolos para que los nuevos clientes al meterlos en la cola
+que la caja esta ocupada.
+Para resolver el problema, primero anyado las cajas vacias.
+A continuacion voy sacando el cliente mas prioritario y metiendo el siguiente hasta que me
+quedo sin clientes que meter, entonces ya sabemos la caja que le toca a Isamael ya que sera la siguiente.
+Voy sumando los segundos que llevan ocupadas y para que los nuevos clientes al meterlos en la cola
 tengan los segundos actualizados.
 
 Por lo tanto:
@@ -60,38 +59,34 @@ bool resuelveCaso() {
 	priority_queue<Cliente> clientesEnCaja; // Cola de clientes que estan en las cajas
 
 	// Lleno las cajas que hay
-	int segs;
-	int i = 0;
-	while (i < C && clientesEnCaja.size() < N) { //El mayor entre O(N*log n) y  O(C*log n), siendo N el numero de cajas y C de clientes
-		cin >> segs;
-		clientesEnCaja.push({ i + 1,segs }); // O(log n), siendo n el num de elementos de la cola
+	int i = 1;
+	while (i <= N) { //El mayor entre O(N*log n), siendo N el numero de cajas
+		clientesEnCaja.push({ i,0 }); // O(log n), siendo n el num de elementos de la cola
 		i++;
 	}
 
-	// Si no ha llegado al final
-	if (i < N) {
-		cout << (i+1) << endl;
+	// Mienstras sigan quedando clientes
+	int segs;
+	i = 0;
+	while (i < C) { // O(C)
+
+		// Saco el mas prioritario (El q menos segundos tenga)
+		auto cPriori = clientesEnCaja.top(); // O(1)
+		clientesEnCaja.pop(); // O(log n)
+
+		// Leo siguientes segundos del
+		cin >> segs;
+		cPriori.segundos += segs;
+
+		// Anyado siguiente cliente
+		clientesEnCaja.push(cPriori); // O(log n)
+
+		i++;
 	}
-	else {
-		// Mienstras sigan quedando clientes
-		int segAc = 0;
-		while (i < C) { // O(C)
 
-			// Saco el mas prioritario (El q menos segundos tenga)
-			auto cPriori = clientesEnCaja.top(); // O(1)
-			clientesEnCaja.pop(); // O(log n)
+	// Saco el mas prioritario y ya es la solucion
+	cout << clientesEnCaja.top().caja << "\n";
 
-			// Leo siguientes segundos del
-			cin >> segs;
-			segAc += segs;
-
-			// Anyado siguiente cliente
-			clientesEnCaja.push({ cPriori.caja,segAc }); // O(log n)
-		}
-
-		// Saco el mas prioritario y ya es la solucion
-		cout << clientesEnCaja.top().caja << "\n";
-	}
 
 	return true;
 }
