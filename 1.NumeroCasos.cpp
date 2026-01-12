@@ -1,16 +1,14 @@
 /*@ <authors>
  *
- * Nombre, apellidos y usuario del juez (TAISXXX) de los autores de la solución.
+ * MARPV28 Nahia Iglesias Calvo
  *
  *@ </authors> */
 
 #include <iostream>
 #include <fstream>
-//#include <...>
 
 using namespace std;
 
-//#include "..."  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 

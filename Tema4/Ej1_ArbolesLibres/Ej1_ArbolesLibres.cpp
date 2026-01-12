@@ -7,18 +7,16 @@
 
 #include <iostream>
 #include <fstream>
-#include "IndexPQ.h"
-#include <unordered_map>
+#include <vector>
 
 using namespace std;
 
-
+#include "Grafo.h"
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Complejidad en tiempo: O(V+A)
+ Complejidad en espacio: O(V+A)
 
  @ </answer> */
 
@@ -27,60 +25,66 @@ using namespace std;
  // Escribe el código completo de tu solución aquí debajo
  // ================================================================
  //@ <answer>
+class CaminosDFS {
+private:
+	std::vector<bool> visit; // visit[v] = ¿hay camino de s a v?
+	int s; // vértice origen
+	void dfs(Grafo const& G, int v) {
+		visit[v] = true;
+		for (int w : G.ady(v)) {
+			if (!visit[w]) {
+				dfs(G, w);
+			}
+		}
+	}
 
-
-struct Pais {
-	int points;
-	string name;
-};
-
-//bool operator<(const Pais& a, const Pais& b)  {
-//	return b.points < a.points ||
-//		(a.points == b.points && b.name < a.name);
-//}
-
-struct ComparaPais {
 public:
-	bool operator()(Pais const& a, Pais const& b) const{
-		return b.points < a.points ||
-			(a.points == b.points && b.name < a.name);
+	CaminosDFS(Grafo const& g, int s) : visit(g.V(), false), s(s) {
+		dfs(g, s);
+	}
+	// ¿hay camino del origen a v?
+	bool hayCamino(int v) const {
+		return visit[v];
+	}
+
+	bool esConexo() const {
+		// Si todos los vertices tienen camino desde el origen
+		bool conexo = true;
+		int i = 0;
+		while (i < visit.size() && conexo) { // O(V)
+			conexo = hayCamino(i); // O(1)
+			i++;
+		}
+		return conexo;
 	}
 };
 
 bool resuelveCaso() {
 	// leer los datos de la entrada
-	int N;
-	cin >> N;
+	int V, A;
+	cin >> V >> A;
 
 	if (!std::cin)  // fin de la entrada
 		return false;
 
-	string name;
-	int points;
-	IndexPQ<string,Pais, ComparaPais> votacion(N + 1);
-	unordered_map<string, int> mapa_puntos;
+	Grafo g(V);
 
-	for (int i = 0; i < N; i++) {
-
-		cin >> name;
-
-		// Pregunta como van
-		if (name == "?") {
-			cout << votacion.top().elem << " " << votacion.top().prioridad.points << "\n";
-		}
-		// nombre con puntos
-		else {
-			cin >> points;
-
-			// actualizo
-			//votacion.update(i, points); // O(log C)
-		}
+	for (int i = 0; i < A; i++) { // O(A)
+		int a, b;
+		cin >> a >> b;
+		g.ponArista(a, b); //O(1)
 	}
 
-
 	// resolver el caso posiblemente llamando a otras funciones
+	if (A != (V - 1)) {
+		cout << "NO\n";
+	}
+	else {
+		// escribir la solución
+		CaminosDFS arbolLibre(g, 0);
+		cout << (arbolLibre.esConexo() ? "SI\n" : "NO\n"); // O(V)
+	}
 
-	// escribir la solución
 
 	return true;
 }
